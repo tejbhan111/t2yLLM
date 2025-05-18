@@ -5,7 +5,7 @@
 
 - **vLLM** : really fast and well documented inference pipeline for your favorite LLM
 - **Faster-Whisper** : incredibly fast STT for realtime text generation
-- **CoquiTTS** : fast text to speech generating natural voice, maybe the best for french atm
+- **piperTTS** : fast text to speech generating natural voice, maybe the best for french atm
 - **Silero-vad** : process the audio buffer and prevents whisper hallucinations
 - **pvporcupine** : keyword detection
 - **Chromadb** : a vector search database that serves as the model memory
@@ -70,7 +70,7 @@ but you can change it of course. ATM if you want a custom keyword, it is **manda
 - 🔗 [Whisper-streaming](https://github.com/ufal/whisper_streaming)
 - 🔗 [RealtimeSTT](https://github.com/KoljaB/RealtimeSTT)
 - 🔗 [Chromadb](https://github.com/chroma-core/chroma)
-- 🔗 [CoquiTTS](https://github.com/coqui-ai/TTS)
+- 🔗 [piperTTS](https://github.com/rhasspy/piper)
 - 🔗 [json_repair](https://github.com/mangiucugna/json_repair)
 
 ## <u>🔍 APIs :</u>
