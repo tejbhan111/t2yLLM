@@ -156,11 +156,12 @@ class WhispAudio:
     activity_threshold: int
     keyword_sensitivity: float
     client_audio_window: float
-    long_silence: float  # in seconds
+    EOS: float  # in seconds
     virtual_mic_name: str  # from the /etc/asound.conf config also load the alsa module
     stream_buffer_size: int
     channels: int
     period_size: int
+    ignore_own: float  # ignore own audio for loopbacks
     format: str
 
 
@@ -179,6 +180,7 @@ class WhispNET:
     MAX_UDP_SIZE: int
     CHAT_ADDR: str
     rcv_buffer_size: int
+    server_reset_delay: int
 
 
 @dataclass

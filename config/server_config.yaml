@@ -14,12 +14,14 @@ chat:
     sentence_embedder: "paraphrase-multilingual-MiniLM-L12-v2"
     spacy_model: "fr_core_news_lg"
     vllm_chat:
+      #model: "Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4"
+      #model: "Qwen/Qwen3-30B-A3B-GPTQ-Int4"
       model: "JunHowie/Qwen3-14B-GPTQ-Int4"
       enable_chunked_prefill: true
       quantization: "gptq"
       max_model_len: 5000 
       max_num_batched_tokens: 32
-      gpu_memory_utilization: 0.79 #works for 16GB GPU
+      gpu_memory_utilization: 0.79
       block_size: 16
       max_num_seqs: 4
       device: "cuda"
@@ -35,12 +37,12 @@ chat:
   location:
     default_location: "your_city"
     default_timezone: "your_timezone"
-    default_latitude: yy.yyyy
-    default_longitude: yy.yyyy
+    default_latitude: xx.xxxx
+    default_longitude: xx.xxxx
   #meteo openweather API
   #key in environ variables
   weather:
-    max_forecast_days: 5 # max of Openweather
+    max_forecast_days: 5
     api_timeout: 5
   #pokemon requests
   pokemon:
@@ -59,7 +61,7 @@ chat:
   general:
     model_name: "Mars"
     lang: "fr"
-    unprivileged_user: "your_user_name"
+    unprivileged_user: "unpriviledged_user_name"
   #wiki API request
   wikipedia:
     wiki_sentence_search_nb: 3
@@ -74,7 +76,7 @@ whispercpp_server:
     threads: 12
     keyword: "mars"
     phonetic_variants: ["marsse", "marse", "marce"]
-    startup_sound: "your_startup_sound"
+    startup_sound: "./sounds/PS1_startup.wav"
     whisper_cli: "/root/whisper.cpp/build/bin/whisper-cli"
     whisper_stream: "/root/whisper.cpp/build/bin/whisper-stream"
     whisper_model_path: "/root/whisper.cpp/models"  
@@ -83,7 +85,7 @@ whispercpp_server:
     tmpfs_dir: "/dev/shm/whisper_stream"
     tts_engine: "piper-tts"
   audio:
-    sample_rate: 16000
+    sample_rate: 16000 #should not be changed
     chunk_size: 1024
     buffer_time: 2.0 #4.0
     min_cmd_length: 1.0
@@ -92,12 +94,13 @@ whispercpp_server:
     activity_threshold: 500
     keyword_sensitivity: 0.75
     client_audio_window: 2.0
-    long_silence: 1.2 #in seconds
-    virtual_mic_name: "VirtualMIC" #not needed atm
+    EOS: 1.2 #in seconds - silence to detect EOS
+    virtual_mic_name: "VirtualMIC"
     stream_buffer_size: 1024
-    channels: 1
+    channels: 1 #shoudl not be changed
     period_size: 1024 #512
-    format: alsaaudio.PCM_FORMAT_S16_LE
+    ignore_own: 3.0 #ignore own audio for X seconds
+    format: alsaaudio.PCM_FORMAT_S16_LE #have to get the correct type
   network:
     LISTEN_IP: "0.0.0.0"
     AUTHORIZED_IPS: ["127.0.0.1", "xxx.xxx.xxx.xxx"]
@@ -111,7 +114,8 @@ whispercpp_server:
     MAX_UDP_SIZE: 1400
     CHAT_ADDR: "127.0.0.1"
     RPI_IP: "xxx.xxx.xxx.xxx"
-    rcv_buffer_size: 4096 
+    rcv_buffer_size: 4096 #8192
+    server_reset_delay: 90
 
 #all related to vision like MiDaS or yolo or BLIP
 #and related sensors
