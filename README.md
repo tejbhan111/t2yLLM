@@ -1,4 +1,4 @@
-# <u>**t2yLLM : a responsive LLM VOice Assistant**</u>
+# <u>**t2yLLM : a fast LLM Voice Assistant**</u>
 
 
 ## <u>🔥 Backends :</u>
