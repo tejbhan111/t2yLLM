@@ -1052,7 +1052,7 @@ class LLMStreamer:
         ):
             weather_context += "Je n'ai pas pu obtenir d'informations météo précises pour cette requête.\n\n"
 
-        if CONFIG.genral.lang == "fr":
+        if CONFIG.general.lang == "fr":
             system_instructions = f"""Tu es {CONFIG.general.model_name}, un assistant IA français concis et efficace.
             Tu réponds exclusivement en français sauf indication contraire.
             Tu utilises l'alphabet latin moderne jamais d'idéogrammes. Pas de Chinois. Pas d'émoticones ou dessins.
