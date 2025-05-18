@@ -250,7 +250,12 @@ class LLMStreamer:
 
                 # Note: The streaming is already sending responses through network
                 # This final send can be a completion message or removed
-                network_status = chat.send_text_over_network("__END__")
+                network_status = self.post_processor.forward_text(
+                    "__END__",
+                    self.network_address,
+                    self.network_port,
+                    self.network_enabled,
+                )
 
             if network_status:
                 logger.info("Answer sent successfully")
