@@ -80,11 +80,9 @@ but you can change it of course. ATM if you want a custom keyword, it is **manda
 
 ## <u>🛠️ ToDo : </u>
 
-- requirements.txt 
-- Switch from UDP to Quic
 - Keep context between interactions
 - improve processing pipeline
-- interface nginx as a center component
+- Switch from UDP to Quic
 - switch or add option to use OpenWakeWord but I could not make it train on a custom wake word
 
 ## <u>⚖️ License :</u>
