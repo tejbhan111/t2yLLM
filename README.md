@@ -78,8 +78,9 @@ but you can change it of course. ATM if you want a custom keyword, it is **manda
 - 🔗 [Tyradex](https://tyradex.vercel.app/)
 - 🔗 [OpenWeather](https://openweathermap.org/)
 
-## <u>🛠️ To implement : </u>
+## <u>🛠️ ToDo : </u>
 
+- requirements.txt 
 - Switch from UDP to Quic
 - Keep context between interactions
 - improve processing pipeline
