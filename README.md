@@ -1,4 +1,4 @@
-# <u>**t2yLLM : responsive LLM chat over audio**</u>
+# <u>**t2yLLM : a responsive LLM VOice Assistant**</u>
 
 
 ## <u>🔥 Backends :</u>
