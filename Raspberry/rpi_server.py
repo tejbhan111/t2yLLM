@@ -43,6 +43,18 @@ class AudioStreamer:
         self.received_audio_buffer = bytearray()
         self.fragments = {}
         self.current_message_id = None
+        """
+        class variables controlling that
+        the devices stays open during the full
+        stream and not fragment based. Else it induces 
+        latency and cracking sounds because of closing and 
+        opening intermitently
+        """
+        self.last_fragment_time = 0.0
+        self.fragment_timeout = 5.0  # in seconds
+        self.device_open = False
+        self.stream_on = False
+        """ atm it does not fully solves the problem"""
 
         self.threads = []
 
@@ -148,6 +160,7 @@ class AudioStreamer:
             return
 
         segment_count = 0
+        self.last_fragment_time = time.time()
 
         while self.running:
             try:
@@ -155,6 +168,7 @@ class AudioStreamer:
                     data, addr = self.server_socket.recvfrom(8192)
 
                     if data:
+                        self.last_fragment_time = time.time()
                         if data == b"__END_OF_AUDIO__":
                             if (
                                 self.current_message_id
@@ -165,6 +179,10 @@ class AudioStreamer:
                             if self.received_audio_buffer:
                                 self.output_queue.put(bytes(self.received_audio_buffer))
                                 self.received_audio_buffer = bytearray()
+
+                            self.output_queue.put(
+                                b"__END_OF_AUDIO__"
+                            )  # now we need to forward it
 
                             self.fragments = {}
                             self.current_message_id = None
@@ -194,6 +212,18 @@ class AudioStreamer:
                                 self.received_audio_buffer = self.received_audio_buffer[
                                     bytes_to_extract:
                                 ]
+
+                    current_time = time.time()  # now we check if a timeout was reached
+                    # since the last received fragment (in case __END_OF_AUDIO__ was not
+                    # received or sent properly)
+                    if len(self.received_audio_buffer) > 0:
+                        if (
+                            current_time - self.last_fragment_time
+                        ) > self.fragment_timeout:
+                            self.output_queue.put(bytes(self.received_audio_buffer))
+                            self.received_audio_buffer = bytearray()
+                            self.output_queue.put(b"__TIMEOUT__")
+                            self.last_fragment_time = current_time
 
                 except socket.timeout:
                     continue
@@ -343,18 +373,29 @@ class AudioStreamer:
                 output_device_index=self.config["output_device_index"],
                 frames_per_buffer=self.config["chunk_size"],
             )
+            self.device_open = True
         except Exception:
             return
 
         total_played = 0
+        self.stream_on = False
 
         while self.running:
             try:
                 try:
                     audio_data = self.output_queue.get(timeout=0.1)
 
+                    if (
+                        audio_data == b"__END_OF_AUDIO__"
+                        or audio_data == b"__TIMEOUT__"
+                    ):
+                        self.stream_on = False
+                        continue
+
                     if not audio_data or len(audio_data) == 0:
                         continue
+
+                    self.stream_on = True
 
                     if len(audio_data) % 2 != 0:  # 16kHz mono
                         audio_data = (
@@ -389,9 +430,10 @@ class AudioStreamer:
                 time.sleep(0.5)
 
         try:
-            if self.output_stream:
+            if self.output_stream and self.device_open:
                 self.output_stream.stop_stream()
                 self.output_stream.close()
+                self.device_open = False
         except Exception as e:
             print(f"Error closing audio stream : {e}")
 
@@ -524,10 +566,11 @@ class AudioStreamer:
             except Exception:
                 pass
 
-        if self.output_stream:
+        if self.output_stream and self.device_open:
             try:
                 self.output_stream.stop_stream()
                 self.output_stream.close()
+                self.device_open = False
             except Exception:
                 pass
 
