@@ -10,7 +10,7 @@ import sys
 import wave
 import numpy as np
 import soundfile as sf
-from config.PiConfigLoader import Loader
+from PiConfigLoader import Loader
 
 CONFIG = Loader().load_pi_config()
 
