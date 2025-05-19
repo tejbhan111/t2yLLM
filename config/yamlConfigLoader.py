@@ -143,6 +143,8 @@ class WhispModel:
     piper_voice_path: str
     tmpfs_dir: str
     tts_engine: str
+    porcupine_path: str
+    porcupine_keyword_path: str
 
 
 @dataclass
