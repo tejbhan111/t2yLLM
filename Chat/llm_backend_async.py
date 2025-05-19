@@ -26,6 +26,8 @@ from vllm import SamplingParams
 from vllm.v1.engine.async_llm import AsyncLLM
 from vllm.engine.arg_utils import AsyncEngineArgs
 from vllm.distributed.parallel_state import destroy_model_parallel
+from vllm.distributed.parallel_state import destroy_distributed_environment
+
 import asyncio  # yeah thanks for the hard time
 
 # multisearch class
@@ -1161,35 +1163,64 @@ class LLMStreamer:
         return messages
 
     def make_context(self, user_input, query_type, extra_info):
-        context_message = f"Requête: {user_input}\n\n"
+        if CONFIG.general.lang == "fr":
+            context_message = f"Requête: {user_input}\n\n"
 
-        if self.memory_handler.self_memory and not self.need_search:
-            context_message += (
-                "Informations probablement liées supplémentaires provenant de ta propre mémoire:\n"
-                + "\n".join(self.self_memory)
-                + "\n\n"
-            )
-
-        self.memory_handler.self_memory = None
-
-        if "location" in extra_info:
-            loc = extra_info["location"]
-            if loc["city"] != "Inconnue":
+            if self.memory_handler.self_memory and not self.need_search:
                 context_message += (
-                    f"Localisation: {loc['city']}, {loc['region']}, {loc['country']}\n"
+                    "Informations probablement liées supplémentaires provenant de ta propre mémoire:\n"
+                    + "\n".join(self.self_memory)
+                    + "\n\n"
                 )
 
-        if "weather" in extra_info and "error" not in extra_info["weather"]:
-            w = extra_info["weather"]
-            context_message += f"Météo actuelle: {w['temperature']}°C, {w['description']}, humidité {w['humidity']}%\n"
+            self.memory_handler.self_memory = None
 
-        if "time" in extra_info:
-            context_message += f"heure actuelle : {extra_info['time']}\n"
+            if "location" in extra_info:
+                loc = extra_info["location"]
+                if loc["city"] != "Inconnue":
+                    context_message += f"Localisation: {loc['city']}, {loc['region']}, {loc['country']}\n"
 
-        if "date" in extra_info:
-            context_message += f"date actuelle : {extra_info['date']}\n"
+            if "weather" in extra_info and "error" not in extra_info["weather"]:
+                w = extra_info["weather"]
+                context_message += f"Météo actuelle: {w['temperature']}°C, {w['description']}, humidité {w['humidity']}%\n"
 
-        return context_message
+            if "time" in extra_info:
+                context_message += f"heure actuelle : {extra_info['time']}\n"
+
+            if "date" in extra_info:
+                context_message += f"date actuelle : {extra_info['date']}\n"
+
+            return context_message
+        else:
+            context_message = f"Request: {user_input}\n\n"
+
+            if self.memory_handler.self_memory and not self.need_search:
+                context_message += (
+                    "Additional possibly related information from your own memory:\n"
+                    + "\n".join(self.self_memory)
+                    + "\n\n"
+                )
+
+            self.memory_handler.self_memory = None
+
+            if "location" in extra_info:
+                loc = extra_info["location"]
+                if loc["city"] != "Unknown":
+                    context_message += (
+                        f"Location: {loc['city']}, {loc['region']}, {loc['country']}\n"
+                    )
+
+            if "weather" in extra_info and "error" not in extra_info["weather"]:
+                w = extra_info["weather"]
+                context_message += f"Current weather: {w['temperature']}°C, {w['description']}, humidity {w['humidity']}%\n"
+
+            if "time" in extra_info:
+                context_message += f"Current time: {extra_info['time']}\n"
+
+            if "date" in extra_info:
+                context_message += f"Current date: {extra_info['date']}\n"
+
+            return context_message
 
 
 class MemoryHandler:
@@ -1586,6 +1617,7 @@ async def main():
         post_processor=postProcessor,
         meta_search=metaSearcher,
     )
+
     await chat.load_model()
 
     signal.signal(signal.SIGINT, chat.post_processor.signal_handler)
@@ -1617,14 +1649,25 @@ async def main():
                 await worker_task
             except asyncio.CancelledError:
                 pass
+            is_distributed_initialized = False
+            try:
+                is_distributed_initialized = torch.distributed.is_initialized()
+                if is_distributed_initialized:
+                    torch.distributed.destroy_process_group()
+                    logger.info("PyTorch distributed process group destroyed")
+            except Exception as e:
+                logger.error(f"Error destroying PyTorch process group: {e}")
+                pass
+            await asyncio.sleep(2.0)
             destroy_model_parallel()
+            destroy_distributed_environment()
+            time.sleep(5.0)
             # well that doesnt work anymore with async
             # I am doing it wrong
             del chat
-            gc.collect()
             torch.cuda.empty_cache()
-            if torch.distributed.is_initialized():
-                torch.distributed.destroy_process_group()
+            gc.collect()
+            time.sleep(3.0)
             await asyncio.sleep(3)
             break
 
@@ -1647,7 +1690,7 @@ async def main():
 
         chat.answer2user = ""
 
-    logger.warn("Stopping all threads")
+    logger.warning("Stopping all threads")
     await asyncio.sleep(7)
     logger.info("All threads stopped")
 

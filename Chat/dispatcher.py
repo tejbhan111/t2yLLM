@@ -111,10 +111,10 @@ class VoiceServer:
         # pvporcupine params
         self.porcupine = pvporcupine.create(
             access_key=os.environ.get("PORCUPINE_KEY"),
-            keyword_paths=["./porcupine/Ok-Mars_fr_linux_v3_0_0.ppn"],
+            keyword_paths=[self.voice_config.model.porcupine_keyword_path],
             # that, you have to download from them, it doesnt come
             # with the .ppn file
-            model_path="./porcupine/porcupine_params_fr.pv",
+            model_path=self.voice_config.model.porcupine_path,
             sensitivities=[0.6],  # defaults to 0.5 if not
         )
         self.porcupine_buffer = bytearray()
@@ -1076,9 +1076,14 @@ class VoiceServer:
         self.logger.info("Whisper thread stopped")
 
     def send_test_command(self):
-        test_command = "Bonjour, Mars. Comment ça va aujourd'hui?"
-        self.logger.info(f"\nSending test command to LLM : '{test_command}'")
-        self.send_command_to_llm(test_command)
+        if self.voice_config.general.lang == "fr":
+            test_command = "Bonjour. Comment ça va aujourd'hui?"
+            self.logger.info(f"\nSending test command to LLM : '{test_command}'")
+            self.send_command_to_llm(test_command)
+        else:
+            test_command = "Hello. How are you today ?"
+            self.logger.info(f"\nSending test command to LLM : '{test_command}'")
+            self.send_command_to_llm(test_command)
 
 
 def main():
