@@ -25,9 +25,10 @@ class PiConfig:
 
 class Loader:
     def __init__(self):
-        file = os.path.join(os.geitcwd(), "PiConfig.yaml")
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        file = os.path.join(current_dir, "piConfig.yaml")
         with open(file, "r") as config:
             self.config = yaml.safe_load(config)
 
-        def load_pi_config(self):
-            return from_dict(data_class=PiConfig, data=self.config["Pi"])
+    def load_pi_config(self):
+        return from_dict(data_class=PiConfig, data=self.config["Pi"])
