@@ -24,6 +24,9 @@ but you can change it of course. ATM if you want a custom keyword, it is **manda
 - **Vector Search** : stores all in a synthetic way in chromadb if needed and can retrieve the memorized info
 - **t2yLLM** is meant to work on a 16GB GPU, but in order to achieve that, first launch the LLM backend script in order to avoid OOM
 
+![image](https://github.com/user-attachments/assets/36b36dc5-66e0-4327-8110-dcb8614d1798)
+
+
 ## <u>💡 Specifics :</u>
 
 ### - material :
