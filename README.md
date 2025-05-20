@@ -76,7 +76,7 @@ it needs quantization. You also need to fully load the llm_back_async.py first**
 
 ## <u>⚙️ Environment variables :</u>
 
-create a .env file and :
+create a .env file and use python-dotenv or edit your ~/.bashrc :
 
 - export PORCUPINE_KEY='myporcupinekey'
 - export OPENWEATHERMAP_API_KEY='myopenweatherkey'
