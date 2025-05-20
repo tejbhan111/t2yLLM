@@ -64,7 +64,7 @@ but you can change it of course. ATM if you want a custom keyword, it is **manda
   - The audio dispatcher transforms the LLM answer to speech with coqui TTS and then sends audio parts in .flac
     over the network to reduce bandwidth usage and decrease latency
 
-## <u>⚙️ Parameters & specifics:</u>
+## <u>⚙️ Parameters :</u>
 
 - configuration should be done via the .yaml config file without having to directly interact with the code
 - configuration can be enhanced via the YamlConfig_Loader.py
