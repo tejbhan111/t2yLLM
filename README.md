@@ -113,8 +113,9 @@ create a .env file and use python-dotenv or edit your ~/.bashrc :
 - Keep context between interactions
 - improve processing pipeline
 - English pokemon API (and .txt as well as phonetics)
-- Switch from UDP to Quic
-- switch or add option to use OpenWakeWord but I could not make it train on a custom wake word
+- Add the ability to change user agent names in .yaml config files
+- Add the ability to use either UDP or Quic 
+- switch or add option to use OpenWakeWord with available custom model weights (but I could not compile properly and make it train on a custom wake word)
 
 ## <u>⚖️ License :</u>
 
