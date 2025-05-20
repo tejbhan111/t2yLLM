@@ -1,6 +1,20 @@
 # <u>**t2yLLM : a fast LLM Voice Assistant**</u>
 
 
+## <u>💡 What it does :</u>
+
+- **t2yLLM** lets you speak to your device of choice (here a raspberry Pi with a respeaker hat from seeed studio)
+and get an audio answer from your favorite LLM (here Qwen3 by default).
+It should just work like any home assistant.
+The default keyword to activate speech detection is **"Ok Mars"**
+but you can change it of course.
+ATM if you want a custom keyword, it is **mandatory** to create a Picovoice account (check [Picovoice](https://picovoice.ai/)), train and download a custom keyword to get a working pipeline.
+- **Meteo** : It can search for meteo infos using your OpenWeather API key
+- **Pokemon** : Look for any Pokemon info using Tyradex API (french)
+- **Wikipedia** : Make Wikipedia searches using the python API
+- **Vector Search** : stores all in a synthetic way in chromadb if needed and can retrieve the memorized info
+- **t2yLLM** is meant to work on a 16GB GPU, but in order to achieve that, first launch the LLM backend script in order to avoid OOM
+
 ## <u>💡 How it works : </u>
 - **llm_backend_async.py** receives user prompts (text/str), generates an answer
   (token by token with the async engine of vllm) and forwards it to the dispatcher.
@@ -19,18 +33,6 @@
 it needs quantization. You also need to fully load the llm_back_async.py first**. Should have no problem on 24GB GPUs.
 
 - Different parameters of vLLM can be used to save VRAM like enforce_eager, max_model_len etc... vLLM documentation is very rich
-
-## <u>💡 Functionalities :</u>
-
-- **t2yLLM** lets you speak to your device of choice (here a raspberry Pi with a respeaker hat from seeed studio)
-and get an audio answer from your favorite LLM (here Qwen3 by default).
-It should just work like any home assistant. The default keyword to activate speech detection is **"Ok Mars"**
-but you can change it of course. ATM if you want a custom keyword, it is **mandatory** to create a Picovoice account (check [Picovoice](https://picovoice.ai/)), train and download a custom keyword to get a working pipeline.
-- **Meteo** : It can search for meteo infos using your OpenWeather API key
-- **Pokemon** : Look for any Pokemon info using Tyradex API (french)
-- **Wikipedia** : Make Wikipedia searches using the python API
-- **Vector Search** : stores all in a synthetic way in chromadb if needed and can retrieve the memorized info
-- **t2yLLM** is meant to work on a 16GB GPU, but in order to achieve that, first launch the LLM backend script in order to avoid OOM
 
 ![image](https://github.com/user-attachments/assets/36b36dc5-66e0-4327-8110-dcb8614d1798)
 
