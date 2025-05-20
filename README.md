@@ -1,17 +1,6 @@
 # <u>**t2yLLM : a fast LLM Voice Assistant**</u>
 
 
-## <u>🔥 Backends :</u>
-
-- **vLLM** : really fast and well documented inference pipeline for your favorite LLM
-- **Faster-Whisper** : incredibly fast STT for realtime text generation
-- **piperTTS** : fast text to speech generating natural voice, maybe the best for french atm
-- **Silero-vad** : process the audio buffer and prevents whisper hallucinations
-- **pvporcupine** : keyword detection
-- **Chromadb** : a vector search database that serves as the model memory
-- **default LLM** : Qwen3 14B or other variants, GPTQ 4Bit quantized
-- **Pytorch**
-
 ## <u>💡 How it works : </u>
 - **llm_backend_async.py** receives user prompts (text/str), generates an answer
   (token by token with the async engine of vllm) and forwards it to the dispatcher.
@@ -45,6 +34,17 @@ but you can change it of course. ATM if you want a custom keyword, it is **manda
 
 ![image](https://github.com/user-attachments/assets/36b36dc5-66e0-4327-8110-dcb8614d1798)
 
+
+## <u>🔥 Backends :</u>
+
+- **vLLM** : really fast and well documented inference pipeline for your favorite LLM
+- **Faster-Whisper** : incredibly fast STT for realtime text generation
+- **piperTTS** : fast text to speech generating natural voice, maybe the best for french atm
+- **Silero-vad** : process the audio buffer and prevents whisper hallucinations
+- **pvporcupine** : keyword detection
+- **Chromadb** : a vector search database that serves as the model memory
+- **default LLM** : Qwen3 14B or other variants, GPTQ 4Bit quantized
+- **Pytorch**
 
 ## <u>💡 Specifics :</u>
 
