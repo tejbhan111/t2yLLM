@@ -20,7 +20,8 @@ ATM if you want a custom keyword, it is **mandatory** to create a Picovoice acco
 - **llm_backend_async.py** receives user prompts (text/str), generates an answer
   (token by token with the async engine of vllm) and forwards it to the dispatcher.
   this script should be installed on your server/desktop.
-  ![llm_backend_async py](https://github.com/user-attachments/assets/119a6bf7-e94e-4ed0-8a27-54270c1e0061)
+ ![llm](https://github.com/user-attachments/assets/d15d89c2-ce67-4571-b4b5-cb123fb0be7b)
+
 
   
 - the **dispatcher.py** script runs Faster-Whisper, piperTTS, silero and porcupine. It is responsible for :
