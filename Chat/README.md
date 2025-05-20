@@ -5,3 +5,7 @@
 - if you have low VRAM, scripts should be launched in this order :
   1 - llm_backend_async.py
   2 - dispatcher.py
+
+- the directory sctructure by default should be like :
+  - Desktop 1 : ./Mars/config/<yaml config file and loader> and ./Mars/Chat/llm_backend_async.py
+  - Desktop 1 (or Desktop 2) : ./Mars/config/<yaml config file and loader> and ./Mars/somedir/dispatcher.py
