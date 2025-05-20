@@ -34,7 +34,8 @@ it needs quantization. You also need to fully load the llm_back_async.py first**
 
 - Different parameters of vLLM can be used to save VRAM like enforce_eager, max_model_len etc... vLLM documentation is very rich
 
-![image](https://github.com/user-attachments/assets/36b36dc5-66e0-4327-8110-dcb8614d1798)
+![t2yLLM](https://github.com/user-attachments/assets/21c1988d-dd92-48d8-8632-fe34aa4b4188)
+
 
 
 ## <u>🔥 Backends :</u>
