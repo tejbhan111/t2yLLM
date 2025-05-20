@@ -54,7 +54,12 @@ class AudioStreamer:
         self.fragment_timeout = 5.0  # in seconds
         self.device_open = False
         self.stream_on = False
-        """ atm it does not fully solves the problem"""
+        """
+        padding with silence still doesnt solves the
+        craking sound of audio closing and opening at the end 
+        and begining of audio. Annoying
+        """
+        self.padding = b"\x00" * 2 * self.config["chunk_size"]
 
         self.threads = []
 
@@ -393,6 +398,9 @@ class AudioStreamer:
                         continue
 
                     if not audio_data or len(audio_data) == 0:
+                        if self.stream_on:
+                            self.output_stream.write(self.padding)
+                            continue
                         continue
 
                     self.stream_on = True
@@ -422,6 +430,9 @@ class AudioStreamer:
                             break
 
                 except queue.Empty:
+                    if self.output_stream:
+                        self.output_stream.write(self.padding)
+                        continue
                     continue
                 except Exception:
                     time.sleep(0.1)
