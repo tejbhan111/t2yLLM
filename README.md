@@ -50,14 +50,14 @@ it needs quantization. You also need to fully load the llm_back_async.py first**
 
 ## <u>💡 Specifics :</u>
 
-### - material :
+###  Material :
   - **client side** :
     - Raspberry Pi 5, 4GB
     - respeaker like from seeed studio
   - **server side** :
     - An Nvidia GPU with 16GB of VRAM at least
 
-### - Pipeline :
+###  Pipeline :
   - **t2yLLM** uses AsyncLLMEngine in order to stream tokens and generate sound from them as soon as possible.
   - The audio dispatcher processes text received from the LLM and transforms it to .flac segments and then
     sends them to the client (raspberry Pi)
