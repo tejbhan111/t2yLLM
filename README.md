@@ -1,4 +1,4 @@
-# <u>**t2yLLM : a fast LLM Voice Assistant**</u>
+# <u>**t2yLLM : a fast LLM based Voice Assistant**</u>
 
 
 ## <u>💡 What it does :</u>
@@ -56,7 +56,7 @@ it needs quantization. You also need to fully load the llm_back_async.py first**
     - Raspberry Pi 5, 4GB
     - respeaker like from seeed studio
   - **server side** :
-    - An Nvidia GPU with 16GB of VRAM at least
+    - An Nvidia GPU with 16GB of VRAM (mini)
 
 ###  Pipeline :
   - **t2yLLM** uses AsyncLLMEngine in order to stream tokens and generate sound from them as soon as possible.
@@ -75,6 +75,8 @@ it needs quantization. You also need to fully load the llm_back_async.py first**
 - the directory structure should be /t2yLLM/config and /t2yLLM/Chat
 
 ## <u>⚙️ Environment variables :</u>
+
+create a .env file and :
 
 - export PORCUPINE_KEY='myporcupinekey'
 - export OPENWEATHERMAP_API_KEY='myopenweatherkey'
