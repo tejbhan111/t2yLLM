@@ -1,3 +1,6 @@
+
+This is just a copy of the structure of Faster-Whisper file tree to get to utils.py.
+
 You can simply edit the Faster-Whisper utils.py if you want to add models under custom names.
 For example here, "quantized" does not exists in the base file.
 This is located in the directory where you installed Faster-Whisper with git clone (./faster-whisper/faster_whisper/utils.py).
